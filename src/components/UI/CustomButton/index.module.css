@@ -1,0 +1,10 @@
+.custom-btn {
+    background: transparent;
+    border: 1px solid gray;
+    padding: 12px;
+    text-align: center;
+}
+.custom-btn:hover {
+    background: gray;
+    color: white;
+}

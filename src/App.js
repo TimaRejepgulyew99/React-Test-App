@@ -30,10 +30,13 @@ function App () {
   const addPost = post => {
     setPosts([...posts, { ...post, id: posts.length }])
   }
-
+  const removePost = postId => {
+    setPosts(posts.filter(post => post.id !== postId))
+  }
   return (
     <div className='App'>
       <PostList
+        removePost={removePost}
         addPost={addPost}
         posts={posts}
         title={'Post about programming'}

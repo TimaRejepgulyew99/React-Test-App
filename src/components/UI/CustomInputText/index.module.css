@@ -1,4 +1,6 @@
 .custom-input__field {
+    width: 300px;
+    display: block;
     padding: 8px;
-    border: 1px sold gray;
+    border: 1px sold teal;
 }

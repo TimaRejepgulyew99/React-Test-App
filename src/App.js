@@ -1,48 +1,67 @@
-import './App.css'
-import React, { useState } from 'react'
+import "./App.css";
+import React, { useState, useMemo } from "react";
 
-// import Counter from './components/Counter/index'
-// import ClassCounter from './components/Counter-class/index'
-import PostList from './components/Post/index'
-function App () {
+import PostList from "./components/Post/index";
+function App() {
+  const [sortValue, setSortValue] = useState("title");
+  const [filter, setFilter] = useState("");
   const [posts, setPosts] = useState([
     {
       id: 1,
-      title: 'JavaScript',
-      description: 'Javascript язык программирование'
+      title: "JavaScript",
+      description: "Javascript язык программирование",
     },
     {
       id: 2,
-      title: 'Python',
-      description: 'Python язык программирование'
+      title: "Python",
+      description: "Python язык программирование",
     },
     {
       id: 3,
-      title: 'Java',
-      description: 'Java язык программирование'
+      title: "Java",
+      description: "Java язык программирование",
     },
     {
       id: 4,
-      title: 'C#',
-      description: 'C# язык программирование'
+      title: "C#",
+      description: "C# язык программирование",
+    },
+  ]);
+  const sortedPost = useMemo(() => {
+    let res = [...posts];
+    if (filter) {
+      console.log(filter);
+      res = res.filter((el) => el[sortValue].includes(filter));
     }
-  ])
-  const addPost = post => {
-    setPosts([...posts, { ...post, id: posts.length }])
-  }
-  const removePost = postId => {
-    setPosts(posts.filter(post => post.id !== postId))
-  }
+    return res.sort((a, b) => a[sortValue].localeCompare(b[sortValue]));
+  }, [sortValue, filter, posts]);
+
+  const sortPost = (sortBy) => {
+    setSortValue(sortBy);
+  };
+  const filterChanged = (value) => {
+    setFilter(value);
+  };
+  const addPost = (post) => {
+    setPosts([...posts, { ...post, id: posts.length + 1 }]);
+  };
+  const removePost = (postId) => {
+    setPosts(posts.filter((post) => post.id !== postId));
+  };
   return (
-    <div className='App'>
+    <div className="App">
       <PostList
+        filter={filter}
+        filterChanged={filterChanged}
+        sortValue={sortValue}
+        sort={sortPost}
         removePost={removePost}
         addPost={addPost}
-        posts={posts}
-        title={'Post about programming'}
+        posts={sortedPost}
+        title={"Post about programming"}
       ></PostList>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

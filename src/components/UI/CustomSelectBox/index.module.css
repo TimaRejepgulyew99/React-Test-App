@@ -1,0 +1,12 @@
+.custom-selectBox {
+    padding: 8px;
+    border: 1px solid gray;
+    display: block;
+    color: gray;
+}
+.custom-selectBox__item {
+    margin: 10px;
+    padding: 16px;
+    display: block;
+    color: gray;
+}

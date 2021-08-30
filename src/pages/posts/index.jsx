@@ -1,30 +1,14 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import PostList from "../../components/Post/index";
-function PostPage() {
+import "redux";
+import { connect } from "react-redux";
+function PostPage({ posts: { posts }, loadPosts, clearPosts, createPost }) {
+  useEffect(async () => {
+    await loadPosts();
+    return clearPosts();
+  }, []);
   const [sortValue, setSortValue] = useState("title");
   const [filter, setFilter] = useState("");
-  const [posts, setPosts] = useState([
-    {
-      id: 1,
-      title: "JavaScript",
-      description: "Javascript язык программирование",
-    },
-    {
-      id: 2,
-      title: "Python",
-      description: "Python язык программирование",
-    },
-    {
-      id: 3,
-      title: "Java",
-      description: "Java язык программирование",
-    },
-    {
-      id: 4,
-      title: "C#",
-      description: "C# язык программирование",
-    },
-  ]);
   const sortedPost = useMemo(() => {
     let res = [...posts];
     if (filter) {
@@ -40,13 +24,13 @@ function PostPage() {
     setFilter(value);
   };
   const addPost = (post) => {
-    setPosts([...posts, { ...post, id: posts.length + 1 }]);
+    createPost(post);
   };
   const removePost = (postId) => {
-    setPosts(posts.filter((post) => post.id !== postId));
+    // setPosts(posts.filter((post) => post.id !== postId));
   };
   return (
-    <div className="App">
+    <div>
       <PostList
         filter={filter}
         filterChanged={filterChanged}
@@ -60,5 +44,13 @@ function PostPage() {
     </div>
   );
 }
+const mapStateProps = (state) => ({
+  posts: state,
+});
+const mapDispatchProps = (dispatch) => ({
+  createPost: dispatch.posts.createPost,
+  loadPosts: dispatch.posts.loadPosts,
+  clearPosts: dispatch.posts.clearPosts,
+});
 
-export default PostPage;
+export default connect(mapStateProps, mapDispatchProps)(PostPage);

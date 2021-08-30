@@ -1,5 +1,6 @@
 import { BrowserRouter, Link, Route, Switch, Redirect } from "react-router-dom";
 import PostPage from "../pages/posts";
+import CurrentPost from "../pages/posts/_id";
 import AboutPage from "../pages/about";
 import Menu from "../components/Layout/Menu";
 export default function Router() {
@@ -7,13 +8,13 @@ export default function Router() {
     <BrowserRouter>
       <Menu />
       <Switch>
-        <Route path="/posts">
+        <Route exact path="/posts">
           <PostPage />
         </Route>
-        <Route path="/posts/:id">
-          <PostPage />
+        <Route exact path="/posts/:id">
+          <CurrentPost />
         </Route>
-        <Route path="/about">
+        <Route exact path="/about">
           <AboutPage />
         </Route>
         <Redirect to="/posts" />

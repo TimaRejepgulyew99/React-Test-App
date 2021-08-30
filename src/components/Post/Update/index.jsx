@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import classModule from "./index.module.css";
 import CustomInputText from "../../UI/CustomInputText";
 import CustomButton from "../../UI/CustomButton";
 
-export default ({ post, updatePost }) => {
+const UpdatePost = ({ post, updatePost }) => {
   const [title, setTitle] = useState(post?.title);
   const [description, setDescription] = useState(post?.description);
   useEffect(() => {
@@ -31,3 +32,7 @@ export default ({ post, updatePost }) => {
     </section>
   );
 };
+UpdatePost.propTypes = {
+  post: PropTypes.object.isRequired,
+};
+export default UpdatePost;

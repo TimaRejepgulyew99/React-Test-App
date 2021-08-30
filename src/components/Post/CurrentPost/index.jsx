@@ -6,7 +6,7 @@ import CustomDialog from "../../UI/CustomDialog";
 import UpdatePost from "../Update/index";
 const CurrentPost = ({ updatePost, loadPostById }) => {
   const params = useParams();
-  const [post, setPost] = useState({});
+  const [post, setPost] = useState({ title: "", description: "" });
   const [swichedDialog, toggleDialog] = useState(false);
   useEffect(async () => {
     const res = await loadPostById(params.id);

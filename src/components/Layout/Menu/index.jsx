@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import CustomButton from "../../UI/CustomButton";
 
 export default function Menu() {
   return (

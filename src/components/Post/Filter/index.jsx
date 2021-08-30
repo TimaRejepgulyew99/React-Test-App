@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import CustomInputText from "../../UI/CustomInputText";
 
 export default function Filter({ value, valueChanged }) {
